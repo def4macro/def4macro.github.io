@@ -86,7 +86,7 @@
 <link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Life," />
+  <meta name="keywords" content="Linux," />
 
 
 
@@ -104,16 +104,22 @@
 
 
 
-<meta name="description" content="Bla Bla Bla">
+<meta name="description" content="1.安装C/C++的编译环境和gtk libgtk2.0-devsudo apt-get install build-essential
+    sudo apt-get install libgtk2.0-dev
+2.编译共享内库‘    gcc -shared -o libsublime-imfix.so sublime-imfix.c  pkg-config --libs --cflags">
 <meta property="og:type" content="article">
-<meta property="og:title" content="First blog using Hexo">
+<meta property="og:title" content="Linux下修复Sublime Text 3无法使用Fcitx搜狗拼音的方法">
 <meta property="og:url" content="http://def4macro.com/2016/06/27/First-blog-using-Hexo/index.html">
 <meta property="og:site_name" content="Shi Zilong's website">
-<meta property="og:description" content="Bla Bla Bla">
-<meta property="og:updated_time" content="2016-06-27T06:59:21.636Z">
+<meta property="og:description" content="1.安装C/C++的编译环境和gtk libgtk2.0-devsudo apt-get install build-essential
+    sudo apt-get install libgtk2.0-dev
+2.编译共享内库‘    gcc -shared -o libsublime-imfix.so sublime-imfix.c  pkg-config --libs --cflags">
+<meta property="og:updated_time" content="2016-06-27T07:32:44.668Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="First blog using Hexo">
-<meta name="twitter:description" content="Bla Bla Bla">
+<meta name="twitter:title" content="Linux下修复Sublime Text 3无法使用Fcitx搜狗拼音的方法">
+<meta name="twitter:description" content="1.安装C/C++的编译环境和gtk libgtk2.0-devsudo apt-get install build-essential
+    sudo apt-get install libgtk2.0-dev
+2.编译共享内库‘    gcc -shared -o libsublime-imfix.so sublime-imfix.c  pkg-config --libs --cflags">
 
 
 
@@ -136,7 +142,7 @@
 
   <link rel="canonical" href="http://def4macro.com/2016/06/27/First-blog-using-Hexo/"/>
 
-  <title> First blog using Hexo | Shi Zilong's website </title>
+  <title> Linux下修复Sublime Text 3无法使用Fcitx搜狗拼音的方法 | Shi Zilong's website </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -306,7 +312,7 @@
             
             
               
-                First blog using Hexo
+                Linux下修复Sublime Text 3无法使用Fcitx搜狗拼音的方法
               
             
           </h1>
@@ -340,7 +346,7 @@
 
           
           
-             <span id="/2016/06/27/First-blog-using-Hexo/" class="leancloud_visitors" data-flag-title="First blog using Hexo">
+             <span id="/2016/06/27/First-blog-using-Hexo/" class="leancloud_visitors" data-flag-title="Linux下修复Sublime Text 3无法使用Fcitx搜狗拼音的方法">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -362,7 +368,22 @@
       
 
       
-        <p>Bla Bla Bla</p>
+        <h3 id="1-安装C-C-的编译环境和gtk-libgtk2-0-dev"><a href="#1-安装C-C-的编译环境和gtk-libgtk2-0-dev" class="headerlink" title="1.安装C/C++的编译环境和gtk libgtk2.0-dev"></a>1.安装C/C++的编译环境和gtk libgtk2.0-dev</h3><p><code>sudo apt-get install build-essential
+    sudo apt-get install libgtk2.0-dev</code></p>
+<h3 id="2-编译共享内库"><a href="#2-编译共享内库" class="headerlink" title="2.编译共享内库"></a>2.编译共享内库</h3><p>‘<br>    gcc -shared -o libsublime-imfix.so sublime-imfix.c  <code>pkg-config --libs --cflags gtk+-2.0</code> -fPIC<br>‘</p>
+<h3 id="3-将libsublime-imfix-so移动到-usr-lib"><a href="#3-将libsublime-imfix-so移动到-usr-lib" class="headerlink" title="3.将libsublime-imfix.so移动到/usr/lib/"></a>3.将libsublime-imfix.so移动到/usr/lib/</h3><p><code>sudo mv libsublime-imfix.so /usr/lib/</code></p>
+<h3 id="4-启动-Sublime-Text-3"><a href="#4-启动-Sublime-Text-3" class="headerlink" title="4.启动 Sublime Text 3"></a>4.启动 Sublime Text 3</h3><p><code>LD_PRELOAD=/usr/lib/libsublime-imfix.so subl</code></p>
+<p>但是这样的话，我们每次都要在终端里面使用命令启动sublime text 3，这样很不方便，接下来我们还要通过修改subl命令达到使用subl等命令启动以及修改sublime-text.desktop达到点击图标启动。</p>
+<h3 id="1-打开sublime-text-2"><a href="#1-打开sublime-text-2" class="headerlink" title="1.打开sublime-text-2"></a>1.打开sublime-text-2</h3><p><code>sudo vim /usr/bin/subl</code></p>
+<h3 id="2-修改subl为以下内容"><a href="#2-修改subl为以下内容" class="headerlink" title="2.修改subl为以下内容"></a>2.修改subl为以下内容</h3><p>`</p>
+<pre><code>#!/bin/bash
+
+LD_PRELOAD=/usr/lib/libsublime-imfix.so /opt/sublime_text/sublime_text &quot;$@&quot;
+</code></pre><p>`</p>
+<p>这样就能使用subl等命令启动</p>
+<h3 id="3-打开sublime-text-desktop"><a href="#3-打开sublime-text-desktop" class="headerlink" title="3.打开sublime-text.desktop"></a>3.打开sublime-text.desktop</h3><p><code>sudo vim /usr/share/applications/sublime-text.desktop</code></p>
+<h3 id="4-修改sublime-text-desktop"><a href="#4-修改sublime-text-desktop" class="headerlink" title="4.修改sublime-text.desktop"></a>4.修改sublime-text.desktop</h3><p>将<br><code>/opt/sublime_text/sublime_text</code><br>替换为<br><code>subl</code><br>好了，接下来你在dash中点击打开sublime text吧，开始你的代码之旅吧。</p>
+<p>代码fork:<a href="https://github.com/pavelhurt/sublime2-fcitx-fix" target="_blank" rel="external">https://github.com/pavelhurt/sublime2-fcitx-fix</a></p>
 
       
     </div>
@@ -384,7 +405,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Life/" rel="tag">#Life</a>
+            <a href="/tags/Linux/" rel="tag">#Linux</a>
           
         </div>
       
@@ -415,7 +436,7 @@
   <div class="comments" id="comments">
     
       <div class="ds-thread" data-thread-key="2016/06/27/First-blog-using-Hexo/"
-           data-title="First blog using Hexo" data-url="http://def4macro.com/2016/06/27/First-blog-using-Hexo/">
+           data-title="Linux下修复Sublime Text 3无法使用Fcitx搜狗拼音的方法" data-url="http://def4macro.com/2016/06/27/First-blog-using-Hexo/">
       </div>
     
   </div>
@@ -470,7 +491,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>
@@ -517,7 +538,7 @@
               
             
             
-              <p class="post-toc-empty">此文章未包含目录</p>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-安装C-C-的编译环境和gtk-libgtk2-0-dev"><span class="nav-number">1.</span> <span class="nav-text">1.安装C/C++的编译环境和gtk libgtk2.0-dev</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-编译共享内库"><span class="nav-number">2.</span> <span class="nav-text">2.编译共享内库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-将libsublime-imfix-so移动到-usr-lib"><span class="nav-number">3.</span> <span class="nav-text">3.将libsublime-imfix.so移动到/usr/lib/</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-启动-Sublime-Text-3"><span class="nav-number">4.</span> <span class="nav-text">4.启动 Sublime Text 3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-打开sublime-text-2"><span class="nav-number">5.</span> <span class="nav-text">1.打开sublime-text-2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-修改subl为以下内容"><span class="nav-number">6.</span> <span class="nav-text">2.修改subl为以下内容</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-打开sublime-text-desktop"><span class="nav-number">7.</span> <span class="nav-text">3.打开sublime-text.desktop</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-修改sublime-text-desktop"><span class="nav-number">8.</span> <span class="nav-text">4.修改sublime-text.desktop</span></a></li></ol></div>
             
           </div>
         </section>

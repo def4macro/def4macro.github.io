@@ -309,7 +309,7 @@
               
                 
                 <a class="post-title-link" href="/2016/06/27/First-blog-using-Hexo/" itemprop="url">
-                  First blog using Hexo
+                  Linux下修复Sublime Text 3无法使用Fcitx搜狗拼音的方法
                 </a>
               
             
@@ -344,7 +344,7 @@
 
           
           
-             <span id="/2016/06/27/First-blog-using-Hexo/" class="leancloud_visitors" data-flag-title="First blog using Hexo">
+             <span id="/2016/06/27/First-blog-using-Hexo/" class="leancloud_visitors" data-flag-title="Linux下修复Sublime Text 3无法使用Fcitx搜狗拼音的方法">
                &nbsp; | &nbsp;
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -368,7 +368,22 @@
       
         
           
-            <p>Bla Bla Bla</p>
+            <h3 id="1-安装C-C-的编译环境和gtk-libgtk2-0-dev"><a href="#1-安装C-C-的编译环境和gtk-libgtk2-0-dev" class="headerlink" title="1.安装C/C++的编译环境和gtk libgtk2.0-dev"></a>1.安装C/C++的编译环境和gtk libgtk2.0-dev</h3><p><code>sudo apt-get install build-essential
+    sudo apt-get install libgtk2.0-dev</code></p>
+<h3 id="2-编译共享内库"><a href="#2-编译共享内库" class="headerlink" title="2.编译共享内库"></a>2.编译共享内库</h3><p>‘<br>    gcc -shared -o libsublime-imfix.so sublime-imfix.c  <code>pkg-config --libs --cflags gtk+-2.0</code> -fPIC<br>‘</p>
+<h3 id="3-将libsublime-imfix-so移动到-usr-lib"><a href="#3-将libsublime-imfix-so移动到-usr-lib" class="headerlink" title="3.将libsublime-imfix.so移动到/usr/lib/"></a>3.将libsublime-imfix.so移动到/usr/lib/</h3><p><code>sudo mv libsublime-imfix.so /usr/lib/</code></p>
+<h3 id="4-启动-Sublime-Text-3"><a href="#4-启动-Sublime-Text-3" class="headerlink" title="4.启动 Sublime Text 3"></a>4.启动 Sublime Text 3</h3><p><code>LD_PRELOAD=/usr/lib/libsublime-imfix.so subl</code></p>
+<p>但是这样的话，我们每次都要在终端里面使用命令启动sublime text 3，这样很不方便，接下来我们还要通过修改subl命令达到使用subl等命令启动以及修改sublime-text.desktop达到点击图标启动。</p>
+<h3 id="1-打开sublime-text-2"><a href="#1-打开sublime-text-2" class="headerlink" title="1.打开sublime-text-2"></a>1.打开sublime-text-2</h3><p><code>sudo vim /usr/bin/subl</code></p>
+<h3 id="2-修改subl为以下内容"><a href="#2-修改subl为以下内容" class="headerlink" title="2.修改subl为以下内容"></a>2.修改subl为以下内容</h3><p>`</p>
+<pre><code>#!/bin/bash
+
+LD_PRELOAD=/usr/lib/libsublime-imfix.so /opt/sublime_text/sublime_text &quot;$@&quot;
+</code></pre><p>`</p>
+<p>这样就能使用subl等命令启动</p>
+<h3 id="3-打开sublime-text-desktop"><a href="#3-打开sublime-text-desktop" class="headerlink" title="3.打开sublime-text.desktop"></a>3.打开sublime-text.desktop</h3><p><code>sudo vim /usr/share/applications/sublime-text.desktop</code></p>
+<h3 id="4-修改sublime-text-desktop"><a href="#4-修改sublime-text-desktop" class="headerlink" title="4.修改sublime-text.desktop"></a>4.修改sublime-text.desktop</h3><p>将<br><code>/opt/sublime_text/sublime_text</code><br>替换为<br><code>subl</code><br>好了，接下来你在dash中点击打开sublime text吧，开始你的代码之旅吧。</p>
+<p>代码fork:<a href="https://github.com/pavelhurt/sublime2-fcitx-fix" target="_blank" rel="external">https://github.com/pavelhurt/sublime2-fcitx-fix</a></p>
 
           
         
@@ -448,7 +463,7 @@
           
             <div class="site-state-item site-state-tags">
               <a href="/tags">
-                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-count">2</span>
                 <span class="site-state-item-name">标签</span>
               </a>
             </div>

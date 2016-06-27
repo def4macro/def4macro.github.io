@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://def4macro.com/"/>
-  <updated>2016-06-27T06:59:21.636Z</updated>
+  <updated>2016-06-27T07:32:44.668Z</updated>
   <id>http://def4macro.com/</id>
   
   <author>
@@ -16,24 +16,38 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>First blog using Hexo</title>
+    <title>Linux下修复Sublime Text 3无法使用Fcitx搜狗拼音的方法</title>
     <link href="http://def4macro.com/2016/06/27/First-blog-using-Hexo/"/>
     <id>http://def4macro.com/2016/06/27/First-blog-using-Hexo/</id>
     <published>2016-06-27T06:57:14.000Z</published>
-    <updated>2016-06-27T06:59:21.636Z</updated>
+    <updated>2016-06-27T07:32:44.668Z</updated>
     
-    <content type="html">&lt;p&gt;Bla Bla Bla&lt;/p&gt;
+    <content type="html">&lt;h3 id=&quot;1-安装C-C-的编译环境和gtk-libgtk2-0-dev&quot;&gt;&lt;a href=&quot;#1-安装C-C-的编译环境和gtk-libgtk2-0-dev&quot; class=&quot;headerlink&quot; title=&quot;1.安装C/C++的编译环境和gtk libgtk2.0-dev&quot;&gt;&lt;/a&gt;1.安装C/C++的编译环境和gtk libgtk2.0-dev&lt;/h3&gt;&lt;p&gt;&lt;code&gt;sudo apt-get install build-essential
+    sudo apt-get install libgtk2.0-dev&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&quot;2-编译共享内库&quot;&gt;&lt;a href=&quot;#2-编译共享内库&quot; class=&quot;headerlink&quot; title=&quot;2.编译共享内库&quot;&gt;&lt;/a&gt;2.编译共享内库&lt;/h3&gt;&lt;p&gt;‘&lt;br&gt;    gcc -shared -o libsublime-imfix.so sublime-imfix.c  &lt;code&gt;pkg-config --libs --cflags gtk+-2.0&lt;/code&gt; -fPIC&lt;br&gt;‘&lt;/p&gt;
+&lt;h3 id=&quot;3-将libsublime-imfix-so移动到-usr-lib&quot;&gt;&lt;a href=&quot;#3-将libsublime-imfix-so移动到-usr-lib&quot; class=&quot;headerlink&quot; title=&quot;3.将libsublime-imfix.so移动到/usr/lib/&quot;&gt;&lt;/a&gt;3.将libsublime-imfix.so移动到/usr/lib/&lt;/h3&gt;&lt;p&gt;&lt;code&gt;sudo mv libsublime-imfix.so /usr/lib/&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&quot;4-启动-Sublime-Text-3&quot;&gt;&lt;a href=&quot;#4-启动-Sublime-Text-3&quot; class=&quot;headerlink&quot; title=&quot;4.启动 Sublime Text 3&quot;&gt;&lt;/a&gt;4.启动 Sublime Text 3&lt;/h3&gt;&lt;p&gt;&lt;code&gt;LD_PRELOAD=/usr/lib/libsublime-imfix.so subl&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;但是这样的话，我们每次都要在终端里面使用命令启动sublime text 3，这样很不方便，接下来我们还要通过修改subl命令达到使用subl等命令启动以及修改sublime-text.desktop达到点击图标启动。&lt;/p&gt;
+&lt;h3 id=&quot;1-打开sublime-text-2&quot;&gt;&lt;a href=&quot;#1-打开sublime-text-2&quot; class=&quot;headerlink&quot; title=&quot;1.打开sublime-text-2&quot;&gt;&lt;/a&gt;1.打开sublime-text-2&lt;/h3&gt;&lt;p&gt;&lt;code&gt;sudo vim /usr/bin/subl&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&quot;2-修改subl为以下内容&quot;&gt;&lt;a href=&quot;#2-修改subl为以下内容&quot; class=&quot;headerlink&quot; title=&quot;2.修改subl为以下内容&quot;&gt;&lt;/a&gt;2.修改subl为以下内容&lt;/h3&gt;&lt;p&gt;`&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;#!/bin/bash
+
+LD_PRELOAD=/usr/lib/libsublime-imfix.so /opt/sublime_text/sublime_text &amp;quot;$@&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;p&gt;`&lt;/p&gt;
+&lt;p&gt;这样就能使用subl等命令启动&lt;/p&gt;
+&lt;h3 id=&quot;3-打开sublime-text-desktop&quot;&gt;&lt;a href=&quot;#3-打开sublime-text-desktop&quot; class=&quot;headerlink&quot; title=&quot;3.打开sublime-text.desktop&quot;&gt;&lt;/a&gt;3.打开sublime-text.desktop&lt;/h3&gt;&lt;p&gt;&lt;code&gt;sudo vim /usr/share/applications/sublime-text.desktop&lt;/code&gt;&lt;/p&gt;
+&lt;h3 id=&quot;4-修改sublime-text-desktop&quot;&gt;&lt;a href=&quot;#4-修改sublime-text-desktop&quot; class=&quot;headerlink&quot; title=&quot;4.修改sublime-text.desktop&quot;&gt;&lt;/a&gt;4.修改sublime-text.desktop&lt;/h3&gt;&lt;p&gt;将&lt;br&gt;&lt;code&gt;/opt/sublime_text/sublime_text&lt;/code&gt;&lt;br&gt;替换为&lt;br&gt;&lt;code&gt;subl&lt;/code&gt;&lt;br&gt;好了，接下来你在dash中点击打开sublime text吧，开始你的代码之旅吧。&lt;/p&gt;
+&lt;p&gt;代码fork:&lt;a href=&quot;https://github.com/pavelhurt/sublime2-fcitx-fix&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;https://github.com/pavelhurt/sublime2-fcitx-fix&lt;/a&gt;&lt;/p&gt;
 </content>
     
     <summary type="html">
     
-      &lt;p&gt;Bla Bla Bla&lt;/p&gt;
-
+      &lt;h3 id=&quot;1-安装C-C-的编译环境和gtk-libgtk2-0-dev&quot;&gt;&lt;a href=&quot;#1-安装C-C-的编译环境和gtk-libgtk2-0-dev&quot; class=&quot;headerlink&quot; title=&quot;1.安装C/C++的编译环境和gtk libgtk2.0-d
     
     </summary>
     
     
-      <category term="Life" scheme="http://def4macro.com/tags/Life/"/>
+      <category term="Linux" scheme="http://def4macro.com/tags/Linux/"/>
     
   </entry>
   
