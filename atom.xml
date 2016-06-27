@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://def4macro.com/"/>
-  <updated>2016-06-27T06:53:08.852Z</updated>
+  <updated>2016-06-27T06:57:27.414Z</updated>
   <id>http://def4macro.com/</id>
   
   <author>
@@ -16,15 +16,19 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title></title>
-    <link href="http://def4macro.com/2016/06/27/helloword/"/>
-    <id>http://def4macro.com/2016/06/27/helloword/</id>
-    <published>2016-06-27T06:53:08.852Z</published>
-    <updated>2016-06-27T06:53:08.852Z</updated>
+    <title>First blog using Hexo</title>
+    <link href="http://def4macro.com/2016/06/27/First-blog-using-Hexo/"/>
+    <id>http://def4macro.com/2016/06/27/First-blog-using-Hexo/</id>
+    <published>2016-06-27T06:57:14.000Z</published>
+    <updated>2016-06-27T06:57:27.414Z</updated>
     
-    <content type="html"></content>
+    <content type="html">&lt;p&gt;Bla Bla Bla&lt;/p&gt;
+</content>
     
     <summary type="html">
+    
+      &lt;p&gt;Bla Bla Bla&lt;/p&gt;
+
     
     </summary>
     
