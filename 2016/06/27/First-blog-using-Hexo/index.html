@@ -106,20 +106,20 @@
 
 <meta name="description" content="1.安装C/C++的编译环境和gtk libgtk2.0-devsudo apt-get install build-essential
     sudo apt-get install libgtk2.0-dev
-2.编译共享内库‘    gcc -shared -o libsublime-imfix.so sublime-imfix.c  pkg-config --libs --cflags">
+2.编译共享内库‘    gcc -shared -o libsublime-imfix.so sublime-imfix.c  `pkg-config –libs –cflags g">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux下修复Sublime Text 3无法使用Fcitx搜狗拼音的方法">
 <meta property="og:url" content="http://def4macro.com/2016/06/27/First-blog-using-Hexo/index.html">
 <meta property="og:site_name" content="Shi Zilong's website">
 <meta property="og:description" content="1.安装C/C++的编译环境和gtk libgtk2.0-devsudo apt-get install build-essential
     sudo apt-get install libgtk2.0-dev
-2.编译共享内库‘    gcc -shared -o libsublime-imfix.so sublime-imfix.c  pkg-config --libs --cflags">
-<meta property="og:updated_time" content="2016-06-27T07:32:44.668Z">
+2.编译共享内库‘    gcc -shared -o libsublime-imfix.so sublime-imfix.c  `pkg-config –libs –cflags g">
+<meta property="og:updated_time" content="2016-06-27T07:34:39.241Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux下修复Sublime Text 3无法使用Fcitx搜狗拼音的方法">
 <meta name="twitter:description" content="1.安装C/C++的编译环境和gtk libgtk2.0-devsudo apt-get install build-essential
     sudo apt-get install libgtk2.0-dev
-2.编译共享内库‘    gcc -shared -o libsublime-imfix.so sublime-imfix.c  pkg-config --libs --cflags">
+2.编译共享内库‘    gcc -shared -o libsublime-imfix.so sublime-imfix.c  `pkg-config –libs –cflags g">
 
 
 
@@ -370,7 +370,7 @@
       
         <h3 id="1-安装C-C-的编译环境和gtk-libgtk2-0-dev"><a href="#1-安装C-C-的编译环境和gtk-libgtk2-0-dev" class="headerlink" title="1.安装C/C++的编译环境和gtk libgtk2.0-dev"></a>1.安装C/C++的编译环境和gtk libgtk2.0-dev</h3><p><code>sudo apt-get install build-essential
     sudo apt-get install libgtk2.0-dev</code></p>
-<h3 id="2-编译共享内库"><a href="#2-编译共享内库" class="headerlink" title="2.编译共享内库"></a>2.编译共享内库</h3><p>‘<br>    gcc -shared -o libsublime-imfix.so sublime-imfix.c  <code>pkg-config --libs --cflags gtk+-2.0</code> -fPIC<br>‘</p>
+<h3 id="2-编译共享内库"><a href="#2-编译共享内库" class="headerlink" title="2.编译共享内库"></a>2.编译共享内库</h3><p>‘<br>    gcc -shared -o libsublime-imfix.so sublime-imfix.c  `pkg-config –libs –cflags gtk+-2.0` -fPIC<br>‘</p>
 <h3 id="3-将libsublime-imfix-so移动到-usr-lib"><a href="#3-将libsublime-imfix-so移动到-usr-lib" class="headerlink" title="3.将libsublime-imfix.so移动到/usr/lib/"></a>3.将libsublime-imfix.so移动到/usr/lib/</h3><p><code>sudo mv libsublime-imfix.so /usr/lib/</code></p>
 <h3 id="4-启动-Sublime-Text-3"><a href="#4-启动-Sublime-Text-3" class="headerlink" title="4.启动 Sublime Text 3"></a>4.启动 Sublime Text 3</h3><p><code>LD_PRELOAD=/usr/lib/libsublime-imfix.so subl</code></p>
 <p>但是这样的话，我们每次都要在终端里面使用命令启动sublime text 3，这样很不方便，接下来我们还要通过修改subl命令达到使用subl等命令启动以及修改sublime-text.desktop达到点击图标启动。</p>
@@ -382,7 +382,11 @@ LD_PRELOAD=/usr/lib/libsublime-imfix.so /opt/sublime_text/sublime_text &quot;$@&
 </code></pre><p>`</p>
 <p>这样就能使用subl等命令启动</p>
 <h3 id="3-打开sublime-text-desktop"><a href="#3-打开sublime-text-desktop" class="headerlink" title="3.打开sublime-text.desktop"></a>3.打开sublime-text.desktop</h3><p><code>sudo vim /usr/share/applications/sublime-text.desktop</code></p>
-<h3 id="4-修改sublime-text-desktop"><a href="#4-修改sublime-text-desktop" class="headerlink" title="4.修改sublime-text.desktop"></a>4.修改sublime-text.desktop</h3><p>将<br><code>/opt/sublime_text/sublime_text</code><br>替换为<br><code>subl</code><br>好了，接下来你在dash中点击打开sublime text吧，开始你的代码之旅吧。</p>
+<h3 id="4-修改sublime-text-desktop"><a href="#4-修改sublime-text-desktop" class="headerlink" title="4.修改sublime-text.desktop"></a>4.修改sublime-text.desktop</h3><p>将</p>
+<p><code>/opt/sublime_text/sublime_text</code></p>
+<p>替换为</p>
+<p><code>subl</code></p>
+<p>好了，接下来你在dash中点击打开sublime text吧，开始你的代码之旅吧。</p>
 <p>代码fork:<a href="https://github.com/pavelhurt/sublime2-fcitx-fix" target="_blank" rel="external">https://github.com/pavelhurt/sublime2-fcitx-fix</a></p>
 
       
